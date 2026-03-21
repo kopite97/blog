@@ -10,7 +10,9 @@ const nextConfig: NextConfig = {
   images : {
     unoptimized : true,
   },
-  basePath: '/kopite97-blog'
+  basePath: '/blog',
+  // 경로 끝에 /를 붙여서 정적 파일 위치를 더 확실하게 찾기
+  trailingSlash: true
 };
 
 export default nextConfig;
