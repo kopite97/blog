@@ -31,7 +31,7 @@ export default function Home() {
             Kopite 개발 로그
           </h1>
           <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
-            열심히 공부하는 사람
+            열심히 공부하는 사람.. 이것저것 다 해봅니다
             <br />
             기록과 공유
           </p>
