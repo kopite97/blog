@@ -2,6 +2,7 @@
 title: "나의 첫 Next.js 블로그 포스팅"
 date: "2026-03-21"
 description: "마크다운 파싱 테스트 중입니다."
+category: "Develop"
 ---
 
 # Hello World!

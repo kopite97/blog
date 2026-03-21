@@ -31,6 +31,15 @@ export async function getPostData(id: string) {
   };
 }
 
+export interface PostData {
+  id: string;
+  date: string;
+  title: string;
+  category: string;
+  description?: string;
+  contentHtml?: string;
+}
+
 export function getSortedPostsData() {
   // 1. posts 폴더 안의 모든 파일 이름을 읽어온다.. (예: ['hello-world.md'])
   const fileNames = fs.readdirSync(postsDirectory);
@@ -48,9 +57,9 @@ export function getSortedPostsData() {
 
     // 5. id와 데이터를 합쳐서 반환
     return {
-      id,
-      ...(matterResult.data as { title: string; date: string; description?: string }),
-    };
+  id,
+  ...(matterResult.data as { title: string; date: string; category: string; description?: string }),
+};
   });
 
   // 6. 날짜를 기준으로 최신 글이 맨 위에 오도록 내림차순 정렬
