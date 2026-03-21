@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   images : {
     unoptimized : true,
   },
+  basePath: '/kopite97-blog'
 };
 
 export default nextConfig;
