@@ -66,7 +66,7 @@ export function getSortedPostsData() {
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);
 
-  // 파일 이름들 배열을 map으로 돌면서 Next.js가 원하는 형태의 객체 배열로 바꿉니다.
+  // 파일 이름들 배열을 map으로 돌면서 Next.js가 원하는 형태의 객체 배열로 바꾼다.
   return fileNames.map((fileName) => {
     return {
       id: fileName.replace(/\.md$/, ''), // '.md' 글자 떼어내기
