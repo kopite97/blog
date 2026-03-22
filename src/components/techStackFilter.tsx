@@ -1,4 +1,3 @@
-// src/components/TechStackFilter.tsx
 'use client';
 
 import { useState } from 'react';
@@ -22,10 +21,7 @@ const categories = ['All', 'Languages', 'Frameworks', 'Tools'];
 export default function TechStackFilter() {
   const [activeTab, setActiveTab] = useState('All');
 
-  const filteredStacks =
-    activeTab === 'All'
-      ? techStacks
-      : techStacks.filter((stack) => stack.category === activeTab);
+  const filteredStacks = activeTab === 'All' ? techStacks : techStacks.filter((stack) => stack.category === activeTab);
 
   return (
     <div className="mt-10">
