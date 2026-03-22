@@ -1,7 +1,6 @@
-// app/layout.tsx
 import './globals.css';
 import { ThemeProvider } from '@/src/components/ThemeProvider';
-import Navbar from '@/src/components/Navbar'; // ★ Navbar 불러오기
+import Navbar from '@/src/components/Navbar';
 
 export const metadata = {
   title: '노석준의 풀스택 로그',
@@ -21,9 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-[Pretendard] text-gray-900 antialiased transition-colors duration-300 dark:bg-gray-950 dark:text-gray-100">
         <ThemeProvider>
-          {/* ★ 모든 페이지의 최상단에 Navbar가 고정됩니다! */}
           <Navbar />
-
           {children}
         </ThemeProvider>
       </body>

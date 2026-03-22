@@ -1,4 +1,3 @@
-// src/components/Navbar.tsx
 'use client';
 
 import Link from 'next/link';
@@ -9,7 +8,7 @@ export default function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // useEffect를 통해 클라이언트 사이드에서만 버튼이 렌더링되도록 하여 해이드레이션 오류를 방지합니다.
+  // useEffect를 통해 클라이언트 사이드에서만 버튼이 렌더링되도록 하여 해이드레이션 오류를 방지
   useEffect(() => setMounted(true), []);
 
   return (

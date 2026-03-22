@@ -1,9 +1,8 @@
-// app/posts/[id]/page.tsx
 import { getPostData, getAllPostIds } from '@/src/lib/posts';
 import Link from 'next/link';
 import ReadingProgress from '@/src/components/ReadingProgress';
 import TocSidebar from '@/src/components/TocSidebar';
-import Comments from '@/src/components/Comments'; // 이전 답변에서 만든 Comments 컴포넌트
+import Comments from '@/src/components/Comments';
 
 export async function generateStaticParams() {
   return getAllPostIds();
@@ -46,7 +45,7 @@ export default async function Post({ params }: Props) {
               </h1>
             </header>
 
-            {/* 마크다운 본문 다크모드 핵심: dark:prose-invert */}
+            {/* 마크다운 본문 다크모드 */}
             <article className="prose prose-blue prose-lg prose-headings:font-black dark:prose-invert prose-pre:p-0 prose-pre:bg-transparent max-w-none dark:text-gray-200">
               <div dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }} />
             </article>
@@ -70,7 +69,7 @@ export default async function Post({ params }: Props) {
             </footer>
           </div>
 
-          {/* 우측 사이드바 (TocSidebar.tsx는 스스로 다크모드 처리가 되어있어야 합니다.) */}
+          {/* 우측 사이드바 (TocSidebar.tsx는 스스로 다크모드 처리가 되야함.) */}
           {postData.toc && postData.toc.length > 0 && <TocSidebar toc={postData.toc} />}
         </div>
       </main>

@@ -47,7 +47,7 @@ export default function TechStackFilter() {
         {filteredStacks.map((stack) => (
           <span
             key={stack.name}
-            // 스택 태그: 다크모드일 때 배경을 어둡게 하고 그림자를 제거하여 모던하게 표현
+            // 스택 태그: 다크모드일 때 배경을 어둡게 하고 그림자를 제거
             className="rounded-lg border border-gray-100 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm transition-all dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:shadow-none"
           >
             {stack.name}

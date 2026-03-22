@@ -1,10 +1,9 @@
 ---
-title: "Unity-DOTS-system Study"
-date: "2026-03-22"
-description: "성능을 위한 DOTS 공부"
-category: "Develop"
+title: 'Unity-DOTS-system Study'
+date: '2026-03-22'
+description: '성능을 위한 DOTS 공부'
+category: 'Develop'
 ---
-
 
 # 두 번째 포스팅
 
