@@ -1,8 +1,9 @@
-import { getPostData, getAllPostIds } from '@/src/lib/posts';
+import { getPostData, getAllPostIds, getAdjacentPosts } from '@/src/lib/posts';
 import Link from 'next/link';
 import ReadingProgress from '@/src/components/ReadingProgress';
 import TocSidebar from '@/src/components/TocSidebar';
 import Comments from '@/src/components/Comments';
+import PostNav from '@/src/components/PostNav';
 
 export async function generateStaticParams() {
   return getAllPostIds();
@@ -15,13 +16,14 @@ type Props = {
 export default async function Post({ params }: Props) {
   const { id } = await params;
   const postData = await getPostData(id);
+  const { prevPost, nextPost } = getAdjacentPosts(id);
 
   return (
     <div className="relative w-full">
       <ReadingProgress />
-      <div className="flex flex-col lg:flex-row lg:gap-12">
+      <div className="mx-auto flex max-w-6xl flex-col lg:flex-row lg:gap-16">
         {/* 본문 섹션 */}
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           <header className="mb-12 border-b border-gray-100 pb-12 dark:border-gray-800">
             <Link
               href="/"
@@ -49,7 +51,7 @@ export default async function Post({ params }: Props) {
           <article className="prose prose-blue prose-lg prose-headings:font-black dark:prose-invert prose-pre:p-0 prose-pre:bg-transparent max-w-none dark:text-gray-200">
             <div dangerouslySetInnerHTML={{ __html: postData.contentHtml || '' }} />
           </article>
-
+          <PostNav prevPost={prevPost} nextPost={nextPost} />
           <Comments />
 
           <footer className="mt-20 rounded-3xl bg-gray-50 p-8 dark:bg-gray-900">

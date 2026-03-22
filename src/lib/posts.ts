@@ -7,6 +7,8 @@ import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
 import rehypeSlug from 'rehype-slug';
 import rehypeShiki from '@shikijs/rehype';
+import remarkGfm from 'remark-gfm';
+import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'src/posts');
 
@@ -62,6 +64,8 @@ export async function getPostData(id: string): Promise<PostData> {
     .use(remarkParse)
     .use(remarkRehype)
     .use(rehypeSlug)
+    .use(remarkGfm)
+    .use(html)
     .use(() => (tree: any) => {
       tree.children.forEach((node: any) => {
         if (node.type === 'element' && (node.tagName === 'h2' || node.tagName === 'h3')) {
@@ -89,6 +93,37 @@ export async function getPostData(id: string): Promise<PostData> {
 
 export function getAllCategories() {
   const allPosts = getSortedPostsData();
-  const categories = allPosts.map((post) => post.category);
-  return [...new Set(categories)];
+  const categories = allPosts.map((post) => post.category || 'Etc');
+  return ['All', ...Array.from(new Set(categories))];
+}
+
+export function getCategoryData() {
+  const allPosts = getSortedPostsData();
+  const categoryCounts: Record<string, number> = {};
+
+  allPosts.forEach((post) => {
+    const category = post.category || 'Etc';
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+  });
+
+  const sortedCategories = Object.keys(categoryCounts).sort();
+
+  return {
+    totalCount: allPosts.length,
+    counts: categoryCounts,
+    categories: ['All', ...sortedCategories],
+  };
+}
+
+export function getAdjacentPosts(id: string) {
+  const allPosts = getSortedPostsData();
+  const currentIndex = allPosts.findIndex((post) => post.id === id);
+
+  // 날짜 기준 내림차순(최신순)이므로:
+  // index - 1 이 '다음 글' (더 최신글)
+  // index + 1 이 '이전 글' (더 예전글)
+  return {
+    prevPost: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
+    nextPost: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
+  };
 }

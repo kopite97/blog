@@ -5,21 +5,24 @@ import { usePathname } from 'next/navigation';
 
 interface Props {
   categories: string[];
+  counts: Record<string, number>;
+  totalCount: number;
 }
 
-export default function SideCategory({ categories }: Props) {
+export default function SideCategory({ categories, counts, totalCount }: Props) {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-28 hidden w-52 shrink-0 xl:block">
+    <aside className="sticky top-28 hidden w-52 shrink-0 self-start xl:block">
       <nav className="flex flex-col gap-2">
         <h3 className="mb-4 px-4 text-xs font-bold tracking-widest text-gray-400 uppercase dark:text-gray-500">
           Categories
         </h3>
         {categories.map((cat) => {
-          // 카테고리별 경로 설정 (All은 홈으로, 나머지는 해당 카테고리 페이지로)
           const href = cat === 'All' ? '/' : `/categories/${cat}`;
           const isActive = pathname === href;
+          // All일 때는 전체 개수, 아니면 해당 카테고리 개수 사용
+          const count = cat === 'All' ? totalCount : counts[cat];
 
           return (
             <Link
@@ -31,8 +34,18 @@ export default function SideCategory({ categories }: Props) {
                   : 'text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
               }`}
             >
-              {cat}
-              {!isActive && <span className="text-[10px] opacity-0 transition-opacity group-hover:opacity-100">→</span>}
+              <span>{cat}</span>
+
+              {/* 숫자 배지 부분 */}
+              <span
+                className={`ml-2 rounded-full px-2 py-0.5 text-[10px] font-bold transition-colors ${
+                  isActive
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-gray-100 text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600 dark:bg-gray-800 dark:text-gray-400'
+                }`}
+              >
+                {count}
+              </span>
             </Link>
           );
         })}
