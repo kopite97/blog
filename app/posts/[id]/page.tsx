@@ -43,6 +43,7 @@ export default async function Post({ params }: Props) {
               <h1 className="text-4xl font-black tracking-tight text-gray-900 sm:text-5xl dark:text-white">
                 {postData.title}
               </h1>
+              <h4 className="prose text-gray-900 dark:text-white">{postData.description}</h4>
             </header>
 
             {/* 마크다운 본문 다크모드 */}
