@@ -32,8 +32,10 @@ export default function TechStackFilter() {
             onClick={() => setActiveTab(cat)}
             className={`rounded-full px-4 py-1.5 text-sm font-semibold shadow-sm transition-all ${
               activeTab === cat
-                ? 'bg-blue-600 text-white shadow-blue-200'
-                : 'border border-gray-200 bg-white text-gray-500 hover:bg-gray-100'
+                ? // 활성화된 탭: 다크모드일 때 그림자 색상을 어둡게 조절
+                  'bg-blue-600 text-white shadow-blue-200 dark:shadow-blue-900/30'
+                : // 비활성 탭: 다크모드일 때 배경과 테두리를 어둡게, 글씨를 연하게 변경
+                  'border border-gray-200 bg-white text-gray-500 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-200'
             }`}
           >
             {cat}
@@ -45,7 +47,8 @@ export default function TechStackFilter() {
         {filteredStacks.map((stack) => (
           <span
             key={stack.name}
-            className="rounded-lg border border-gray-100 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm transition-all"
+            // 스택 태그: 다크모드일 때 배경을 어둡게 하고 그림자를 제거하여 모던하게 표현
+            className="rounded-lg border border-gray-100 bg-white px-3 py-1 text-sm font-medium text-gray-700 shadow-sm transition-all dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:shadow-none"
           >
             {stack.name}
           </span>

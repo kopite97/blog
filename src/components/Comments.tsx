@@ -1,34 +1,37 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import Giscus from '@giscus/react';
+import { useTheme } from 'next-themes';
 
 export default function Comments() {
-  const ref = useRef<HTMLDivElement>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
+  // 서버/클라이언트 테마 불일치 에러 방지
   useEffect(() => {
-    if (!ref.current || ref.current.hasChildNodes()) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.async = true;
-    script.crossOrigin = 'anonymous';
-
-    // --- 아래 값들을 본인의 설정에 맞게 수정하세요 ---
-    script.setAttribute('data-repo', 'kopite97/blog');
-    script.setAttribute('data-repo-id', 'R_kgDORs0AwQ');
-    script.setAttribute('data-category', 'General');
-    script.setAttribute('data-category-id', 'DIC_kwDORs0Awc4C5ATP');
-    script.setAttribute('data-mapping', 'pathname');
-    script.setAttribute('data-strict', '0');
-    script.setAttribute('data-reactions-enabled', '1');
-    script.setAttribute('data-emit-metadata', '0');
-    script.setAttribute('data-input-position', 'bottom');
-    script.setAttribute('data-theme', 'preferred_color_scheme');
-    script.setAttribute('data-lang', 'ko');
-    // ------------------------------------------
-
-    ref.current.appendChild(script);
+    setMounted(true);
   }, []);
 
-  return <section className="mt-10 border-t border-gray-100 pt-10" ref={ref} />;
+  if (!mounted) return null;
+
+  return (
+    <section className="mt-20 border-t border-gray-100 pt-10 dark:border-gray-800">
+      <Giscus
+        id="comments"
+        repo="kopite97/blog"
+        repoId="R_kgDORs0AwQ"
+        category="General"
+        categoryId="DIC_kwDORs0Awc4C5ATP"
+        mapping="pathname"
+        strict="0"
+        reactionsEnabled="1"
+        emitMetadata="0"
+        inputPosition="bottom"
+        theme={resolvedTheme === 'dark' ? 'dark' : 'light'} //테마 동기화
+        lang="ko"
+        loading="lazy"
+      />
+    </section>
+  );
 }
