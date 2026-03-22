@@ -3,8 +3,8 @@ import { ThemeProvider } from '@/src/components/ThemeProvider';
 import Navbar from '@/src/components/Navbar';
 
 export const metadata = {
-  title: '노석준의 풀스택 로그',
-  description: 'Unity와 웹 생태계를 아우르는 풀스택 개발자의 기록',
+  title: "Kopite97's blog",
+  description: '이것저것 다 해보는 사람',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

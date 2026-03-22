@@ -28,7 +28,7 @@ export default function Home() {
 
           {/* 제목*/}
           <h1 className="mb-6 text-5xl font-black tracking-tight text-gray-900 sm:text-6xl dark:text-white">
-            Kopite's Blog
+            Kopite97's Blog
           </h1>
 
           {/* 설명*/}
@@ -96,7 +96,7 @@ export default function Home() {
 
       {/* 푸터 */}
       <footer className="mt-32 border-t border-gray-100 py-12 text-center text-sm text-gray-400 dark:border-gray-800 dark:text-gray-600">
-        <p className="mb-2">열정적으로 배우고 정직하게 기록합니다.</p>
+        <p className="mb-2">배우고 기록하는거 좋아합니다.</p>
         <p>© 2026 노석준 개발 블로그. All rights reserved.</p>
       </footer>
     </div>
