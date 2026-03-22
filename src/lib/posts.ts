@@ -86,3 +86,9 @@ export async function getPostData(id: string): Promise<PostData> {
     ...(matterResult.data as { date: string; title: string; category: string; description?: string }),
   };
 }
+
+export function getAllCategories() {
+  const allPosts = getSortedPostsData();
+  const categories = allPosts.map((post) => post.category);
+  return [...new Set(categories)];
+}

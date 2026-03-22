@@ -4,6 +4,16 @@ import TechStackFilter from '@/src/components/TechStackFilter';
 
 export default function Home() {
   const allPostsData = getSortedPostsData();
+  const categoryCounts = allPostsData.reduce(
+    (acc, post) => {
+      const cat = post.category || 'Uncategorized';
+      acc[cat] = (acc[cat] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
+
+  const categories = ['All', ...Object.keys(categoryCounts)];
 
   return (
     // 전체 배경 다크모드 적용: dark:bg-gray-950
@@ -36,7 +46,6 @@ export default function Home() {
             이것저것 만져보고 있습니다 <br className="hidden sm:block" />
             공유와 기록
           </p>
-
           <TechStackFilter />
         </header>
 

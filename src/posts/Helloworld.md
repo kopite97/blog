@@ -13,4 +13,4 @@ description: '1인개발 해보고 싶다!!!'
 
 첫 포스팅 한 김에 내가 제일 좋아하는 선수 사진 한장...
 
-![스티븐 제라드](/blog/public/images/gerrard.png)
+![스티븐 제라드](/blog/images/gerrard.png)
