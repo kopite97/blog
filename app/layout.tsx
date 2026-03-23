@@ -7,6 +7,8 @@ import { getCategoryData } from '@/src/lib/posts';
 export const metadata = {
   title: "Kopite97's blog",
   description: '이것저것 다 해보는 사람',
+  template: "%s | Kopite97's Blog",
+  keyword: ['Unity', 'Java', 'Next.js', '게임 개발', '개발 블로그'],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
