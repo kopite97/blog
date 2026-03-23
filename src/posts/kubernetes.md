@@ -1,7 +1,7 @@
 ---
 title: 'Kubernetes 기록'
 date: '2026-03-22'
-category: 'develop'
+category: 'Develop'
 description: '예전에 프로젝트 할 때 했던 쿠버네티스'
 ---
 

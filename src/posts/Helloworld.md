@@ -1,7 +1,7 @@
 ---
 title: '게임 개발 하고 싶다!!'
 date: '2026-03-22'
-category: 'daily'
+category: 'Daily'
 description: '1인개발 해보고 싶다!!!'
 ---
 
