@@ -5,10 +5,18 @@ import SideCategory from '@/src/components/SideCategory';
 import { getCategoryData } from '@/src/lib/posts';
 
 export const metadata = {
-  title: "Kopite97's blog",
+  metadataBase: new URL('https://kopite97.github.io/blog'),
+
+  applicationName: "Kopite97's Blog",
+
+  title: {
+    default: "Kopite97's Blog",
+    template: "%s | Kopite97's Blog",
+  },
   description: '배우고 기록하는 거 좋아합니다.',
-  template: "%s | Kopite97's Blog",
-  keyword: ['Unity', 'Java', 'Next.js', '게임 개발', '개발 블로그'],
+
+  keywords: ['Unity', 'Java', 'Next.js', '게임 개발', '개발 블로그'],
+
   icons: {
     icon: '/favicon.ico',
   },
