@@ -1,7 +1,7 @@
 ---
 title: '프로그래머스 섬 연결하기'
 date: '2026-04-08'
-category: 'Coding-Test'
+category: 'Coding-Test/Graph'
 description: 'Level3'
 ---
 

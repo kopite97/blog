@@ -1,7 +1,7 @@
 ---
 title: '디스크 컨트롤러'
 date: '2026-03-28'
-category: 'Coding-Test'
+category: 'Coding-Test/Heap'
 description: 'Level 3'
 ---
 

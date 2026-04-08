@@ -1,7 +1,7 @@
 ---
 title: '집합의 표현'
 date: '2026-04-07'
-category: 'Coding-Test'
+category: 'Coding-Test/Graph'
 description: 'Gold5'
 ---
 
