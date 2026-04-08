@@ -1,5 +1,5 @@
 ---
-tite: '최단 경로'
+title: '최단 경로'
 date: '2026-04-07'
 category: 'Coding-test'
 description: ' Gold4'
