@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { getSortedPostsData } from '@/src/lib/posts';
 
 type Props = {
-  params: Promise<{ category: string }>;
+  // string이 아니라 string[] (배열)로 받습니다.
+  params: Promise<{ category: string[] }>;
 };
 
 export async function generateStaticParams() {
@@ -13,10 +14,18 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params;
-  const decodedCategory = decodeURIComponent(category);
+
+  // URL 배열을 다시 슬래시(/)로 합쳐서 비교용 문자열로 만듭니다.
+  const decodedCategoryPath = category.map((c) => decodeURIComponent(c)).join('/');
 
   const allPosts = getSortedPostsData();
-  const filteredPosts = allPosts.filter((post) => post.category === decodedCategory);
+
+  // 포스트의 카테고리가 해당 경로로 시작하거나 정확히 일치하는지 확인합니다.
+  const filteredPosts = allPosts.filter((post) => {
+    const postCat = post.category || '';
+    // 예: 현재 페이지가 'Develop'이면 'Develop/Next.js' 글도 모두 보여줌
+    return postCat === decodedCategoryPath || postCat.startsWith(`${decodedCategoryPath}/`);
+  });
 
   return (
     <div className="w-full">
@@ -28,7 +37,7 @@ export default async function CategoryPage({ params }: Props) {
           ← 전체 글로 돌아가기
         </Link>
         <h1 className="mt-6 text-4xl font-black tracking-tight text-gray-900 dark:text-white">
-          <span className="text-blue-600 dark:text-blue-500">#{decodedCategory}</span> 글 목록
+          <span className="text-blue-600 dark:text-blue-500">#{decodedCategoryPath}</span> 글 목록
           <span className="ml-4 text-lg font-medium text-gray-400 dark:text-gray-500">
             {filteredPosts.length}개의 포스트
           </span>

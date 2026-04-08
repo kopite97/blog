@@ -97,24 +97,6 @@ export function getAllCategories() {
   return ['All', ...Array.from(new Set(categories))];
 }
 
-export function getCategoryData() {
-  const allPosts = getSortedPostsData();
-  const categoryCounts: Record<string, number> = {};
-
-  allPosts.forEach((post) => {
-    const category = post.category || 'Etc';
-    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-  });
-
-  const sortedCategories = Object.keys(categoryCounts).sort();
-
-  return {
-    totalCount: allPosts.length,
-    counts: categoryCounts,
-    categories: ['All', ...sortedCategories],
-  };
-}
-
 export function getAdjacentPosts(id: string) {
   const allPosts = getSortedPostsData();
   const currentIndex = allPosts.findIndex((post) => post.id === id);
@@ -126,4 +108,43 @@ export function getAdjacentPosts(id: string) {
     prevPost: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
     nextPost: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
   };
+}
+
+export type CategoryTree = {
+  [main: string]: {
+    count: number; // 대분류 전체 글 개수
+    subCategories: Record<string, number>; // 소분류 이름과 개수
+  };
+};
+
+export function getCategoryTree() {
+  const allPosts = getSortedPostsData();
+  const tree: CategoryTree = {};
+  let totalCount = 0;
+
+  allPosts.forEach((post) => {
+    totalCount++;
+    const catString = post.category || 'Uncategorized';
+
+    // 슬래시(/)를 기준으로 대분류와 소분류 분리 (앞뒤 공백 제거)
+    const parts = catString.split('/').map((p) => p.trim());
+    const mainCat = parts[0];
+    const subCat = parts.length > 1 ? parts[1] : null;
+
+    // 1. 대분류 등록
+    if (!tree[mainCat]) {
+      tree[mainCat] = { count: 0, subCategories: {} };
+    }
+    tree[mainCat].count++;
+
+    // 2. 소분류가 있다면 등록
+    if (subCat) {
+      if (!tree[mainCat].subCategories[subCat]) {
+        tree[mainCat].subCategories[subCat] = 0;
+      }
+      tree[mainCat].subCategories[subCat]++;
+    }
+  });
+
+  return { tree, totalCount };
 }
